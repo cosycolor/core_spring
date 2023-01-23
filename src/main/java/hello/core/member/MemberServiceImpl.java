@@ -1,7 +1,14 @@
 package hello.core.member;
 
 public class MemberServiceImpl implements MemberService{
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    //배우가 직접 캐스팅도 하는 격, 외부에서 주입해주어 캐스팅의 역할을 분리하자
+    //private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
     @Override
     public void join(Member member) {
         memberRepository.save(member);
